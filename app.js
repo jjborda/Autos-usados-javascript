@@ -1,6 +1,4 @@
-//VARIABLES GLOBALES
 
-//Incio de la operacion y bienvenida
 
 function inicio(){
     let nombre = prompt("Ingrese su nombre y apellido")
@@ -14,89 +12,174 @@ function inicio(){
             alert ("Usted no puede ingresar")
         }
 }
-
-//SERVICIO A OFRECER
+//---------------------SERVICIOS A OFRECER---------------------
 
 function servicio(){
     let i = 1
     operacion = prompt(`Indique con un numero que desea realizar
     1- Compra
-    2- Venta
-    3- Permuta
+    2- Venta/permuta
+    3- Ver stock
     4- Terminar
     `)
     if (operacion === "1"){
-        auto = Number(prompt("Indique valor del auto"))
+        compra()
     }
-    else if (operacion === "2"){
-        auto = Number(prompt("Indique valor del auto"))
-    }
-    else if (operacion === "3"){
-        auto = Number(prompt("Indique valor del auto"))
-    }   else if (operacion !=="1"||"2"||"3"){
-        while (i <= 2) {
-        operacion = prompt(`Indique con un numero que desea realizar
-        1- Compra
-        2- Venta
-        3- Permuta
-        4- Terminar
-        `) ; i++; alert("Gracias por su visita")
+        else if (operacion === "2"){
+            ventaPermuta()
         }
+            else if (operacion === "3"){
+                stock()
+            }
+                else if (operacion === "4"){
+                    alert("Gracias por su visita")
+                }
+                else if (operacion !=="1"||"2"||"3"){
+                    while (i <= 2) {
+                    operacion = prompt(`Indique con un numero que desea realizar
+                    1- Compra
+                    2- Venta
+                    3- Permuta
+                    4- Terminar
+                    `) ; i++; alert("Gracias por su visita")
+                }
+            }
         }
-    }
-// VALOR FINAL DE LA OPERACION
-function valorFinal(){
-    if (operacion === "1"){
-        alert("El valor final de su vehiculo es "+ auto * 1.09)   
-    } else if (operacion ==="2"){
-        alert("La compra de su vehiculo es en "+ auto * 1.15 + " menos los gastos de reparacion")
-    }else if (operacion ==="3"){
-        alert("El permtua de su vehiculo es en "+ auto * 1.15 + " menos los gastos de reparacion")
-    }
+
+//-------------------OPERACION COMPRA-------------------
+
+function compra(){
+    tipo = prompt(`Indique con un numero que desea realizar
+        1- particular
+        2- familiar
+        3- utilitario
+        4- volver al menu principal
+        `)
+        if (tipo === "1"){
+            particular.forEach((car) => {
+                alert(`${car.modelo} ${car.version} $${car.precio}`)
+            })
+        }
+            else if (tipo === "2"){
+                familiar.forEach((car,o)=>{
+                    alert(` ${o}: ${car.modelo} ${car.version} $${car.precio}`)
+                })
+            }
+                else if (tipo === "3"){
+                    utilitario.forEach((car,o)=>{
+                        alert(` ${o}: ${car.modelo} ${car.version} $${car.precio}`)
+                    })
+                }
+                else if(tipo === "4"){
+                    servicio()
+                }
 }
-let auto
-let operacion
 
-//Operacion que quiere desarrollar
-inicio()
+//------------------OPERACION VENTA/PERMUTA-------------------
 
-
-
-
-/* ---------------------------------------------------
-
-/* let nombre = "Juan";
-let segundoNombre = " Jose"
-let apellido = "Borda"
-const nombrecompleto = " " + nombre+ segundoNombre + " " + apellido+" "+ miEdad;
-console.log(nombrecompleto)
-
-let nombreDelAlumno = prompt("ingrese su nombre");
-let apellidoDelAlmno = prompt("ingrese su apellido");
-alert(nombreDelAlumno + " " + apellidoDelAlumno); */
-
-/* let estado = prompt("Es culpable?");
-
-if (estado === "si") {
-    console.log ("Iras a la carcel")
-} else if(estado === "no"){
-    console.log("Iras a casa")
+class Producto {
+    auto(modelo,version,precio){
+        this.marca = marca
+        this.version = version
+        this.fecha = fecha
+        this.precio = precio
 }
-else(console.log("Documentacion por favor")) */
+}
+function ventaPermuta(){
+    let marca = prompt("Ingrese marca");
+    let version = prompt("Ingrese version");
+    let fecha = prompt("Ingrese año");
+    let precio = Number( prompt("Ingrese valor pretendido"));
+    const nuevaPermuta = new Producto (marca,version,fecha,precio);
+    arrayPermuta.push(nuevaPermuta);
+    alert(`Ingresado al stock`)
+    let valorToma = precio - (precio * 15 / 100) 
+    alert(`El valor de toma de su unidad es de $${valorToma}`)
+}
 
-/* let gusto = prompt("Ingrese el sabor");
 
-if (gusto === "oreo") {
-    console.log(precioFinal = "El precio del helado de " + gusto + " es de $1.00")
-} else if(gusto === "kitkat"){
-    console.log(precioFinal = "El precio del helado de " + gusto + " es de $1.50")
-} else if(gusto === "chocolate"){
-    console.log(precioFinal = "El precio del helado de " + gusto + " es de $0.75")
-} else if(gusto=== "vainilla"){
-    console.log(precioFinal = "El precio del helado de " + gusto + " es de $0.95") 
-} else(console.log("No tenemos stock")
-) */
- 
+//------------------Stock---------------------
+function stock(){
+    particular.forEach((car) => {//PARA AGREGAR INDICE (car,o) O PUEDO PONER SOLO (CAR) PARA MOSTRAR OBJETO
+        console.log(`${car.modelo} ${car.version} $${car.precio}`)
+    })
+    familiar.forEach((car)=>{//PARA AGREGAR INDICE (car,o) O PUEDO PONER SOLO (CAR) PARA MOSTRAR OBJETO
+        console.log(`${car.modelo} ${car.version} $${car.precio}`)
+    })
+    utilitario.forEach((car)=>{ //PARA AGREGAR INDICE (car,o) O PUEDO PONER SOLO (CAR) PARA MOSTRAR OBJETO
+        console.log(`${car.modelo} ${car.version} $${car.precio}`)
+    })
+}
+//-----------------AUTOS--------------------
+
+const arrayPermuta = []
+
+const particular = [
+    {modelo: "208" ,version: "Active", precio: 4000000},
+    {modelo: "208" ,version: "Allure", precio: 4200000},
+    {modelo: "208" ,version: "Feline", precio: 4300000},
+    {modelo: "208" ,version: "Sport", precio: 4400000},
+]
+const familiar = [
+    {modelo: "2008" ,version: "Active", precio: 4000000},
+    {modelo: "2008" ,version: "Allure", precio: 4200000},
+    {modelo: "2008" ,version: "Feline", precio: 4300000},
+    {modelo: "2008" ,version: "Sport", precio: 4400000},
+    ]
+const utilitario = [
+    {modelo: "Partner" ,version: "Comfort", precio: 8000000},
+    {modelo: "Expert" ,version: "Comfort", precio: 9200000},
+    {modelo: "Boxer" ,version: "Comfort", precio: 10300000},
+    ]
+
+    //----------FUNCIONES--------------------
+    inicio()
+    servicio()
+    compra()
+    permutaVenta()
+    stock()
+
+//INICIO
+
+
+
+
+
+/* mostrarVersiones()
+//Mostrar versiones
+function mostrarVersiones(){
+    arrayModelo.forEach((auto)=>{
+        console.log(auto)
+    })
+}
+let arrayModelo = []
+ */
+
+/* ingreseModelo()
+function ingreseModelo(){
+    let modelo = prompt(`Ingrese modelo
+1- Particular
+2- Familiar
+3- Utilitario
+`)
+if (modelo === "1"){
+    arrayModelo.push(vehiculo[0])
+    arrayModelo.push(vehiculo[1])
+    arrayModelo.push(vehiculo[2])
+    arrayModelo.push(vehiculo[3])
+}
+    else if (modelo === "2"){
+        arrayModelo.push(vehiculo[4])
+        arrayModelo.push(vehiculo[5])
+        arrayModelo.push(vehiculo[6])
+        arrayModelo.push(vehiculo[7])
+    }
+    else if (modelo === "3"){
+        arrayModelo.push(vehiculo[8])
+        arrayModelo.push(vehiculo[9])
+        arrayModelo.push(vehiculo[10])
+    }
+} */
 
 
 
